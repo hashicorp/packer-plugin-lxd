@@ -26,6 +26,7 @@ type FlatConfig struct {
 	InitSleep           *string           `mapstructure:"init_sleep" required:"false" cty:"init_sleep" hcl:"init_sleep"`
 	PublishProperties   map[string]string `mapstructure:"publish_properties" required:"false" cty:"publish_properties" hcl:"publish_properties"`
 	LaunchConfig        map[string]string `mapstructure:"launch_config" required:"false" cty:"launch_config" hcl:"launch_config"`
+	VirtualMachine      *string           `mapstructure:"virtual_machine" cty:"virtual_machine" hcl:"virtual_machine"`
 }
 
 // FlatMapstructure returns a new FlatConfig.
@@ -56,6 +57,7 @@ func (*FlatConfig) HCL2Spec() map[string]hcldec.Spec {
 		"init_sleep":                 &hcldec.AttrSpec{Name: "init_sleep", Type: cty.String, Required: false},
 		"publish_properties":         &hcldec.AttrSpec{Name: "publish_properties", Type: cty.Map(cty.String), Required: false},
 		"launch_config":              &hcldec.AttrSpec{Name: "launch_config", Type: cty.Map(cty.String), Required: false},
+		"virtual_machine":            &hcldec.AttrSpec{Name: "virtual_machine", Type: cty.String, Required: false},
 	}
 	return s
 }
