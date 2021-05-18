@@ -17,12 +17,19 @@ func (s *stepLxdLaunch) Run(ctx context.Context, state multistep.StateBag) multi
 	config := state.Get("config").(*Config)
 	ui := state.Get("ui").(packersdk.Ui)
 
+	if ! config.VirtualMachine {
+		config.VirtualMachine = false
+	} else {
+		config.VirtualMachine = true
+	}
+
 	name := config.ContainerName
 	image := config.Image
 	profile := fmt.Sprintf("--profile=%s", config.Profile)
+	vm := fmt.Sprintf("--vm=%s", strconv.FormatBool(config.VirtualMachine))
 
 	launch_args := []string{
-		"launch", "--ephemeral=false", profile, image, name,
+		"launch", "--ephemeral=false", vm, profile, image, name,
 	}
 
 	for k, v := range config.LaunchConfig {
