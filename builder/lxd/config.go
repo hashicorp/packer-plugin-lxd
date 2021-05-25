@@ -40,7 +40,7 @@ type Config struct {
 	// List of key/value pairs you wish to
 	// pass to lxc launch via --config. Defaults to empty.
 	LaunchConfig map[string]string `mapstructure:"launch_config" required:"false"`
-	// Create LXD virtual-machine image; defaults to false for container image
+	// Create LXD virtual-machine image on hosts running LXD 4.0 and above; defaults to false for container image
 	VirtualMachine bool `mapstructure:"virtual_machine"`
 
 	ctx interpolate.Context
