@@ -1,6 +1,6 @@
 # LXD Plugin
 
-The LXD plugin allows building containers for LXD. The plugin contains a single builder [lxd](/docs/builders/lxd.mdx), 
+The LXD plugin allows building containers for LXD. The plugin contains a single builder [lxd](/docs/builders/lxd.mdx),
 which starts an LXD container, runs provisioners within this container, then saves the container
 as an LXD image.
 
