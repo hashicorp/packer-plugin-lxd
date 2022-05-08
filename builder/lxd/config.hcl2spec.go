@@ -20,6 +20,7 @@ type FlatConfig struct {
 	PackerSensitiveVars []string          `mapstructure:"packer_sensitive_variables" cty:"packer_sensitive_variables" hcl:"packer_sensitive_variables"`
 	OutputImage         *string           `mapstructure:"output_image" required:"false" cty:"output_image" hcl:"output_image"`
 	ContainerName       *string           `mapstructure:"container_name" cty:"container_name" hcl:"container_name"`
+	PublishRemote       *string           `mapstructure:"publish_remote" required:"false" cty:"publish_remote" hcl:"publish_remote"`
 	CommandWrapper      *string           `mapstructure:"command_wrapper" required:"false" cty:"command_wrapper" hcl:"command_wrapper"`
 	Image               *string           `mapstructure:"image" required:"true" cty:"image" hcl:"image"`
 	Profile             *string           `mapstructure:"profile" cty:"profile" hcl:"profile"`
@@ -50,6 +51,7 @@ func (*FlatConfig) HCL2Spec() map[string]hcldec.Spec {
 		"packer_user_variables":      &hcldec.AttrSpec{Name: "packer_user_variables", Type: cty.Map(cty.String), Required: false},
 		"packer_sensitive_variables": &hcldec.AttrSpec{Name: "packer_sensitive_variables", Type: cty.List(cty.String), Required: false},
 		"output_image":               &hcldec.AttrSpec{Name: "output_image", Type: cty.String, Required: false},
+        "publish_remote":             &hcldec.AttrSpec{Name: "publish_remote", Type: cty.String, Required: false},
 		"container_name":             &hcldec.AttrSpec{Name: "container_name", Type: cty.String, Required: false},
 		"command_wrapper":            &hcldec.AttrSpec{Name: "command_wrapper", Type: cty.String, Required: false},
 		"image":                      &hcldec.AttrSpec{Name: "image", Type: cty.String, Required: false},
