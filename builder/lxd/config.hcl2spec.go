@@ -27,6 +27,7 @@ type FlatConfig struct {
 	PublishProperties   map[string]string `mapstructure:"publish_properties" required:"false" cty:"publish_properties" hcl:"publish_properties"`
 	LaunchConfig        map[string]string `mapstructure:"launch_config" required:"false" cty:"launch_config" hcl:"launch_config"`
 	VirtualMachine      *bool             `mapstructure:"virtual_machine" cty:"virtual_machine" hcl:"virtual_machine"`
+	SkipPublish         *bool             `mapstructure:"skip_publish" required:"false" cty:"skip_publish" hcl:"skip_publish"`
 }
 
 // FlatMapstructure returns a new FlatConfig.
@@ -58,6 +59,7 @@ func (*FlatConfig) HCL2Spec() map[string]hcldec.Spec {
 		"publish_properties":         &hcldec.AttrSpec{Name: "publish_properties", Type: cty.Map(cty.String), Required: false},
 		"launch_config":              &hcldec.AttrSpec{Name: "launch_config", Type: cty.Map(cty.String), Required: false},
 		"virtual_machine":            &hcldec.AttrSpec{Name: "virtual_machine", Type: cty.Bool, Required: false},
+		"skip_publish":               &hcldec.AttrSpec{Name: "skip_publish", Type: cty.Bool, Required: false},
 	}
 	return s
 }

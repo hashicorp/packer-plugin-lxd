@@ -42,6 +42,8 @@ type Config struct {
 	LaunchConfig map[string]string `mapstructure:"launch_config" required:"false"`
 	// Create LXD virtual-machine image on hosts running LXD 4.0 and above; defaults to false for container image
 	VirtualMachine bool `mapstructure:"virtual_machine"`
+	// Skip execute `lxc publish`; defaults to false
+	SkipPublish bool `mapstructure:"skip_publish" required:"false"`
 
 	ctx interpolate.Context
 }
