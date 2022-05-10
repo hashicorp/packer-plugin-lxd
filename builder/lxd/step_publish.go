@@ -15,6 +15,11 @@ func (s *stepPublish) Run(ctx context.Context, state multistep.StateBag) multist
 	config := state.Get("config").(*Config)
 	ui := state.Get("ui").(packersdk.Ui)
 
+	if config.SkipPublish {
+		ui.Say("skip_publish is true. Skipping step for publish")
+		return multistep.ActionContinue
+	}
+
 	name := config.ContainerName
 	stop_args := []string{
 		// We created the container with "--ephemeral=false" so we know it is safe to stop.
