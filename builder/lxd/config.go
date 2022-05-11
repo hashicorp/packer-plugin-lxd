@@ -19,6 +19,9 @@ type Config struct {
 	// name.
 	OutputImage   string `mapstructure:"output_image" required:"false"`
 	ContainerName string `mapstructure:"container_name"`
+	// The (optional) name of the LXD remote on which to publish the
+	// container image.
+	PublishRemoteName string `mapstructure:"publish_remote_name" required:"false"`
 	// Lets you prefix all builder commands, such as
 	// with ssh for a remote build host. Defaults to `{{.Command}}`; i.e. no
 	// wrapper.
