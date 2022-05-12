@@ -12,6 +12,9 @@ import (
 type stepPublish struct{}
 
 func (s *stepPublish) Run(ctx context.Context, state multistep.StateBag) multistep.StepAction {
+
+	var remote string = ""
+
 	config := state.Get("config").(*Config)
 	ui := state.Get("ui").(packersdk.Ui)
 
@@ -35,8 +38,12 @@ func (s *stepPublish) Run(ctx context.Context, state multistep.StateBag) multist
 		return multistep.ActionHalt
 	}
 
+	if config.PublishRemoteName != "" {
+		remote = config.PublishRemoteName + ":"
+	}
+
 	publish_args := []string{
-		"publish", name, "--alias", config.OutputImage,
+		"publish", name, remote, "--alias", config.OutputImage,
 	}
 
 	for k, v := range config.PublishProperties {
