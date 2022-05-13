@@ -58,6 +58,10 @@ func (s *stepLxdLaunch) Cleanup(state multistep.StateBag) {
 	config := state.Get("config").(*Config)
 	ui := state.Get("ui").(packersdk.Ui)
 
+	if config.SkipPublish {
+		return
+	}
+
 	cleanup_args := []string{
 		"delete", "--force", config.ContainerName,
 	}

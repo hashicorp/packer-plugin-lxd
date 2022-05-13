@@ -61,8 +61,13 @@ func (b *Builder) Run(ctx context.Context, ui packersdk.Ui, hook packersdk.Hook)
 		return nil, rawErr.(error)
 	}
 
+	id := "0"
+	if !b.config.SkipPublish {
+		id = state.Get("imageFingerprint").(string)
+	}
+
 	artifact := &Artifact{
-		id:        state.Get("imageFingerprint").(string),
+		id:        id,
 		StateData: map[string]interface{}{"generated_data": state.Get("generated_data")},
 	}
 
