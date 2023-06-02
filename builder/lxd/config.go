@@ -21,6 +21,7 @@ type Config struct {
 	// The name of the output artifact. Defaults to
 	// name.
 	OutputImage   string `mapstructure:"output_image" required:"false"`
+	OutputAliases []string `mapstructure:"output_aliases" required:"false"`
 	ContainerName string `mapstructure:"container_name"`
 	// The (optional) name of the LXD remote on which to publish the
 	// container image.

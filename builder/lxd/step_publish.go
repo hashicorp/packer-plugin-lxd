@@ -49,6 +49,13 @@ func (s *stepPublish) Run(ctx context.Context, state multistep.StateBag) multist
 		"publish", name, remote, "--alias", config.OutputImage,
 	}
 
+	if len(config.OutputAliases) != 0 {
+		for _, v := range config.OutputAliases {
+			publish_args = append(publish_args, fmt.Sprintf("--alias"))
+			publish_args = append(publish_args, fmt.Sprintf("%s", v))
+		}
+	}
+	
 	for k, v := range config.PublishProperties {
 		publish_args = append(publish_args, fmt.Sprintf("%s=%s", k, v))
 	}
