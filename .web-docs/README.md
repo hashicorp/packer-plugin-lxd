@@ -27,5 +27,5 @@ $ packer plugins install github.com/hashicorp/lxd
 
 #### Builders
 
-- [LXD](/packer/integrations/hashicorp/lxd/latest/components/builder/lxd) - The LXD builder builds containers with LXD
+- [lxd](/packer/integrations/hashicorp/lxd/latest/components/builder/lxd) - The LXD builder builds containers with LXD
   by starting a container, provisioning it, and exporting it as a tar.gz archive of the root file system.
