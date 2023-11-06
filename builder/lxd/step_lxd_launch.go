@@ -54,6 +54,10 @@ func (s *stepLxdLaunch) Run(ctx context.Context, state multistep.StateBag) multi
 
 	time.Sleep(time.Duration(sleep_seconds) * time.Second)
 	log.Printf("Sleeping for %d seconds...", sleep_seconds)
+	// instance_id is the generic term used so that users can have access to the
+	// instance id inside the provisioners, used in step_provision.
+	state.Put("instance_id", name)
+	ui.Message(fmt.Sprintf("Instance Name: %s", name))
 	return multistep.ActionContinue
 }
 
