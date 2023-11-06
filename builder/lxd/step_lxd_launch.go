@@ -33,17 +33,18 @@ func (s *stepLxdLaunch) Run(ctx context.Context, state multistep.StateBag) multi
 		launch_args = append(launch_args, "--config", fmt.Sprintf("%s=%s", k, v))
 	}
 
-	ui.Say("Creating container...")
-	_, err := LXDCommand(launch_args...)
+	sleep_seconds, err := strconv.Atoi(config.InitSleep)
 	if err != nil {
-		err := fmt.Errorf("Error creating container: %s", err)
+		err := fmt.Errorf("Error parsing InitSleep into int: %s", err)
 		state.Put("error", err)
 		ui.Error(err.Error())
 		return multistep.ActionHalt
 	}
-	sleep_seconds, err := strconv.Atoi(config.InitSleep)
+
+	ui.Say("Creating container...")
+	_, err = LXDCommand(launch_args...)
 	if err != nil {
-		err := fmt.Errorf("Error parsing InitSleep into int: %s", err)
+		err := fmt.Errorf("Error creating container: %s", err)
 		state.Put("error", err)
 		ui.Error(err.Error())
 		return multistep.ActionHalt
