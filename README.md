@@ -1,5 +1,5 @@
-# Packer Plugin Lxd
-The `Lxd` multi-component plugin can be used with HashiCorp [Packer](https://www.packer.io)
+# Packer Plugin Incus 
+The `Incus` multi-component plugin can be used with HashiCorp [Packer](https://www.packer.io)
 to create custom images. For the full list of available features for this plugin see [docs](docs).
 
 ## Installation
@@ -18,9 +18,9 @@ Then, run [`packer init`](https://www.packer.io/docs/commands/init).
 ```hcl
 packer {
   required_plugins {
-    lxd = {
+    incus = {
       version = ">= 1.0.2"
-      source  = "github.com/hashicorp/lxd"
+      source  = "github.com/bketelsen/incus"
     }
   }
 }
@@ -29,7 +29,7 @@ packer {
 
 #### Manual installation
 
-You can find pre-built binary releases of the plugin [here](https://github.com/hashicorp/packer-plugin-lxd/releases).
+You can find pre-built binary releases of the plugin [here](https://github.com/bketelsen/packer-plugin-incus/releases).
 Once you have downloaded the latest archive corresponding to your target OS,
 uncompress it to retrieve the plugin binary file corresponding to your platform.
 To install the plugin, please follow the Packer documentation on
@@ -40,7 +40,7 @@ To install the plugin, please follow the Packer documentation on
 
 If you prefer to build the plugin from sources, clone the GitHub repository
 locally and run the command `go build` from the root
-directory. Upon successful compilation, a `packer-plugin-lxd` plugin
+directory. Upon successful compilation, a `packer-plugin-incus` plugin
 binary file can be found in the root directory.
 To install the compiled plugin, please follow the official Packer documentation
 on [installing a plugin](https://www.packer.io/docs/extending/plugins/#installing-plugins).

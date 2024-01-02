@@ -1,7 +1,7 @@
 // Copyright (c) HashiCorp, Inc.
 // SPDX-License-Identifier: MPL-2.0
 
-package lxd
+package incus
 
 import (
 	"context"
@@ -33,7 +33,7 @@ func (s *stepPublish) Run(ctx context.Context, state multistep.StateBag) multist
 	}
 
 	ui.Say("Stopping container...")
-	_, err := LXDCommand(stop_args...)
+	_, err := IncusCommand(stop_args...)
 	if err != nil {
 		err := fmt.Errorf("Error stopping container: %s", err)
 		state.Put("error", err)
@@ -49,12 +49,16 @@ func (s *stepPublish) Run(ctx context.Context, state multistep.StateBag) multist
 		"publish", name, remote, "--alias", config.OutputImage,
 	}
 
+	if config.Reuse {
+		publish_args = append(publish_args, "--reuse")
+	}
+
 	for k, v := range config.PublishProperties {
 		publish_args = append(publish_args, fmt.Sprintf("%s=%s", k, v))
 	}
 
 	ui.Say("Publishing container...")
-	stdoutString, err := LXDCommand(publish_args...)
+	stdoutString, err := IncusCommand(publish_args...)
 	if err != nil {
 		err := fmt.Errorf("Error publishing container: %s", err)
 		state.Put("error", err)

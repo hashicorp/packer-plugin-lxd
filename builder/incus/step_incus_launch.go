@@ -1,7 +1,7 @@
 // Copyright (c) HashiCorp, Inc.
 // SPDX-License-Identifier: MPL-2.0
 
-package lxd
+package incus
 
 import (
 	"context"
@@ -14,9 +14,9 @@ import (
 	packersdk "github.com/hashicorp/packer-plugin-sdk/packer"
 )
 
-type stepLxdLaunch struct{}
+type stepIncusLaunch struct{}
 
-func (s *stepLxdLaunch) Run(ctx context.Context, state multistep.StateBag) multistep.StepAction {
+func (s *stepIncusLaunch) Run(ctx context.Context, state multistep.StateBag) multistep.StepAction {
 	config := state.Get("config").(*Config)
 	ui := state.Get("ui").(packersdk.Ui)
 
@@ -34,7 +34,7 @@ func (s *stepLxdLaunch) Run(ctx context.Context, state multistep.StateBag) multi
 	}
 
 	ui.Say("Creating container...")
-	_, err := LXDCommand(launch_args...)
+	_, err := IncusCommand(launch_args...)
 	if err != nil {
 		err := fmt.Errorf("Error creating container: %s", err)
 		state.Put("error", err)
@@ -57,7 +57,7 @@ func (s *stepLxdLaunch) Run(ctx context.Context, state multistep.StateBag) multi
 	return multistep.ActionContinue
 }
 
-func (s *stepLxdLaunch) Cleanup(state multistep.StateBag) {
+func (s *stepIncusLaunch) Cleanup(state multistep.StateBag) {
 	config := state.Get("config").(*Config)
 	ui := state.Get("ui").(packersdk.Ui)
 
@@ -70,7 +70,7 @@ func (s *stepLxdLaunch) Cleanup(state multistep.StateBag) {
 	}
 
 	ui.Say("Unregistering and deleting deleting container...")
-	if _, err := LXDCommand(cleanup_args...); err != nil {
+	if _, err := IncusCommand(cleanup_args...); err != nil {
 		ui.Error(fmt.Sprintf("Error deleting container: %s", err))
 	}
 }

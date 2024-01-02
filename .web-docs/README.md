@@ -1,6 +1,6 @@
-The LXD plugin allows building containers for LXD, by starting an LXD container,
+The incus plugin allows building containers for incus, by starting an incus container,
 running provisioners within this container, then saveing the container
-as an LXD image.
+as an incus image.
 
 ### Installation
 
@@ -9,8 +9,8 @@ To install this plugin, copy and paste this code into your Packer configuration,
 ```hcl
 packer {
   required_plugins {
-    lxd = {
-      source  = "github.com/hashicorp/lxd"
+    incus = {
+      source  = "github.com/bketelsen/incus"
       version = "~> 1"
     }
   }
@@ -20,12 +20,12 @@ packer {
 Alternatively, you can use `packer plugins install` to manage installation of this plugin.
 
 ```sh
-$ packer plugins install github.com/hashicorp/lxd
+$ packer plugins install github.com/bketelsen/incus
 ```
 
 ### Components
 
 #### Builders
 
-- [lxd](/packer/integrations/hashicorp/lxd/latest/components/builder/lxd) - The LXD builder builds containers with LXD
+- [incus](/packer/integrations/bketelsen/incus/latest/components/builder/incus) - The incus builder builds containers with incus
   by starting a container, provisioning it, and exporting it as a tar.gz archive of the root file system.

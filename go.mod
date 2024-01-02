@@ -1,4 +1,4 @@
-module github.com/hashicorp/packer-plugin-lxd
+module github.com/bketelsen/packer-plugin-incus
 
 go 1.19
 

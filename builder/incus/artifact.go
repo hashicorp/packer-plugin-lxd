@@ -1,7 +1,7 @@
 // Copyright (c) HashiCorp, Inc.
 // SPDX-License-Identifier: MPL-2.0
 
-package lxd
+package incus
 
 import (
 	"fmt"
@@ -36,6 +36,6 @@ func (a *Artifact) State(name string) interface{} {
 }
 
 func (a *Artifact) Destroy() error {
-	_, err := LXDCommand("image", "delete", a.id)
+	_, err := IncusCommand("image", "delete", a.id)
 	return err
 }

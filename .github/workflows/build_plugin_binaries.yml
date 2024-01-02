@@ -1,7 +1,7 @@
 # Copyright (c) HashiCorp, Inc.
 # SPDX-License-Identifier: MPL-2.0
 
-name: hashicorp/packer-plugin-lxd/build_plugin_binaries
+name: hashicorp/packer-plugin-incus/build_plugin_binaries
 permissions:
   contents: read
 on:
@@ -12,7 +12,7 @@ jobs:
   build_darwin:
     defaults:
       run:
-        working-directory: ~/go/src/github.com/hashicorp/packer-plugin-lxd
+        working-directory: ~/go/src/github.com/hashicorp/packer-plugin-incus
     runs-on: ubuntu-latest
     container:
       image: docker.mirror.hashicorp.services/cimg/go:1.20
@@ -29,7 +29,7 @@ jobs:
   build_freebsd:
     defaults:
       run:
-        working-directory: ~/go/src/github.com/hashicorp/packer-plugin-lxd
+        working-directory: ~/go/src/github.com/hashicorp/packer-plugin-incus
     runs-on: ubuntu-latest
     container:
       image: docker.mirror.hashicorp.services/cimg/go:1.20
@@ -50,7 +50,7 @@ jobs:
   build_linux:
     defaults:
       run:
-        working-directory: ~/go/src/github.com/hashicorp/packer-plugin-lxd
+        working-directory: ~/go/src/github.com/hashicorp/packer-plugin-incus
     runs-on: ubuntu-latest
     container:
       image: docker.mirror.hashicorp.services/cimg/go:1.20
@@ -75,7 +75,7 @@ jobs:
   build_netbsd:
     defaults:
       run:
-        working-directory: ~/go/src/github.com/hashicorp/packer-plugin-lxd
+        working-directory: ~/go/src/github.com/hashicorp/packer-plugin-incus
     runs-on: ubuntu-latest
     container:
       image: docker.mirror.hashicorp.services/cimg/go:1.20
@@ -96,7 +96,7 @@ jobs:
   build_openbsd:
     defaults:
       run:
-        working-directory: ~/go/src/github.com/hashicorp/packer-plugin-lxd
+        working-directory: ~/go/src/github.com/hashicorp/packer-plugin-incus
     runs-on: ubuntu-latest
     container:
       image: docker.mirror.hashicorp.services/cimg/go:1.20
@@ -117,7 +117,7 @@ jobs:
   build_solaris:
     defaults:
       run:
-        working-directory: ~/go/src/github.com/hashicorp/packer-plugin-lxd
+        working-directory: ~/go/src/github.com/hashicorp/packer-plugin-incus
     runs-on: ubuntu-latest
     container:
       image: docker.mirror.hashicorp.services/cimg/go:1.20
@@ -130,7 +130,7 @@ jobs:
   build_windows:
     defaults:
       run:
-        working-directory: ~/go/src/github.com/hashicorp/packer-plugin-lxd
+        working-directory: ~/go/src/github.com/hashicorp/packer-plugin-incus
     runs-on: ubuntu-latest
     container:
       image: docker.mirror.hashicorp.services/cimg/go:1.20

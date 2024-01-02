@@ -1,4 +1,4 @@
-# Contributing to LXD Plugin
+# Contributing to incus Plugin
 
 **First:** if you're unsure or afraid of _anything_, just ask or submit the
 issue or pull request anyway. You won't be yelled at for giving your best
@@ -62,30 +62,30 @@ when addressing our team. For more reading on our code of conduct, please see th
 ## Setting up Go
 
 If you have never worked with Go before, you will have to install its
-runtime in order to build packer with the LXD plugin.
+runtime in order to build packer with the incus plugin.
 
 1. This project always releases from the latest version of golang.
 [Install go](https://golang.org/doc/install#install) To properly build from
 source, you need to have golang >= 1.20
 
-## Setting up LXD plugin for dev
+## Setting up incus plugin for dev
 
-With Go installed, you can already `go get` the LXD plugin and `make dev` in
+With Go installed, you can already `go get` the incus plugin and `make dev` in
 order to compile and test it. These instructions target
 POSIX-like environments (macOS, Linux, Cygwin, etc.) so you may need to
 adjust them for Windows or other shells.
 
-1. Download the LXD plugin source (and its dependencies) by running
-   `go get github.com/hashicorp/packer-plugin-lxd`. This will download the source to
-   `$GOPATH/src/github.com/hashicorp/packer-plugin-lxd`.
+1. Download the incus plugin source (and its dependencies) by running
+   `go get github.com/hashicorp/packer-plugin-incus`. This will download the source to
+   `$GOPATH/src/github.com/hashicorp/packer-plugin-incus`.
 
-2. When working on the LXD plugin, first `cd $GOPATH/src/github.com/hashicorp/packer-plugin-lxd`
-   so you can run `make dev` and easily access other files. `make dev` will build the packer-plugin-lxd binary and install it under `$HOME/.packer.d/plugins/`.
+2. When working on the incus plugin, first `cd $GOPATH/src/github.com/hashicorp/packer-plugin-incus`
+   so you can run `make dev` and easily access other files. `make dev` will build the packer-plugin-incus binary and install it under `$HOME/.packer.d/plugins/`.
 
-3. Make your changes to the LXD plugin source. You can run `make dev` to build and install locally, and `make test` to run unit tests.
-   Any compilation errors will be shown when the binaries are rebuilding. If you don't have `make` you can simply run `go build -o packer-plugin-lxd` from the project root, and `mv packer-plugin-lxd ~/.packer.d/plugins/packer-plugin-lxd` to install the plugin.
+3. Make your changes to the incus plugin source. You can run `make dev` to build and install locally, and `make test` to run unit tests.
+   Any compilation errors will be shown when the binaries are rebuilding. If you don't have `make` you can simply run `go build -o packer-plugin-incus` from the project root, and `mv packer-plugin-incus ~/.packer.d/plugins/packer-plugin-incus` to install the plugin.
 
-4. After building the LXD plugin successfully, use the latest version of Packer to build a machine and verify your changes. In the [example folder](https://github.com/hashicorp/packer-plugin-lxd/blob/main/example) we provide a basic template. Comment out the `packer {}` block to force Packer use the development binary installed in the previous step.
+4. After building the incus plugin successfully, use the latest version of Packer to build a machine and verify your changes. In the [example folder](https://github.com/hashicorp/packer-plugin-incus/blob/main/example) we provide a basic template. Comment out the `packer {}` block to force Packer use the development binary installed in the previous step.
 
 5. If everything works well and the tests pass, run `go fmt ./...` on your code before
    submitting a pull-request.
@@ -94,7 +94,7 @@ adjust them for Windows or other shells.
 ### Opening a Pull Request
 
 Thank you for contributing! When you are ready to open a pull-request, you will
-need to [fork the LXD plugin](https://github.com/hashicorp/packer-plugin-lxd#fork-destination-box), push your
+need to [fork the incus plugin](https://github.com/hashicorp/packer-plugin-incus#fork-destination-box), push your
 changes to your fork, and then open a pull-request.
 
 For example, my github username is `myuser`, so I would do the following:
@@ -102,7 +102,7 @@ For example, my github username is `myuser`, so I would do the following:
 ```
 git checkout -b f-my-feature
 # Develop a patch.
-git push https://github.com/myuser/packer-plugin-lxd f-my-feature
+git push https://github.com/myuser/packer-plugin-incus f-my-feature
 ```
 
 From there, open your fork in your browser to open a new pull-request.
@@ -117,7 +117,7 @@ From there, open your fork in your browser to open a new pull-request.
 2. Once you believe your pull request is ready to be merged, you can remove any
    "[WIP]" prefix from the title and a core team member will review.
 
-3. One of LXD plugin's core team members will look over your contribution and
+3. One of incus plugin's core team members will look over your contribution and
    either merge, or provide comments letting you know if there is anything left
    to do. We do our best to provide feedback in a timely manner, but it may take
    some time for us to respond. We may also have questions that we need answered
@@ -180,12 +180,12 @@ into the project.
 
 #### Working on forks
 
-The easiest way to work on a fork is to set it as a remote of the the LXD plugin
-project. After following the steps in "Setting up Go to work on the LXD plugin":
+The easiest way to work on a fork is to set it as a remote of the the incus plugin
+project. After following the steps in "Setting up Go to work on the incus plugin":
 
 1. Navigate to the code:
 
-   `cd $GOPATH/src/github.com/hashicorp/packer-plugin-lxd`
+   `cd $GOPATH/src/github.com/hashicorp/packer-plugin-incus`
 
 2. Add the remote by running:
 
@@ -193,7 +193,7 @@ project. After following the steps in "Setting up Go to work on the LXD plugin":
 
    For example:
 
-   `git remote add myuser https://github.com/myuser/packer-plugin-lxd.git`
+   `git remote add myuser https://github.com/myuser/packer-plugin-incus.git`
 
 3. Checkout a feature branch:
 
@@ -220,7 +220,7 @@ recommended but not required.
 Use `go get <project>` to add dependencies to the project. See [go mod quick
 start](https://github.com/golang/go/wiki/Modules#quick-start) for examples.
 
-Please only apply the minimal vendor changes to get your PR to work. The LXD plugin
+Please only apply the minimal vendor changes to get your PR to work. The incus plugin
 does not attempt to track the latest version for each dependency.
 
 #### HCL2 Spec code generation
@@ -240,7 +240,7 @@ from the plugin's project root.
 
 #### Running Builder Acceptance Tests
 
-If the LXD Plugin has [acceptance tests](https://en.wikipedia.org/wiki/Acceptance_testing), these probably have some requirements such as environment variables to be set for API tokens and keys. Each test should error and tell you what are missing, so those are not documented here.
+If the incus Plugin has [acceptance tests](https://en.wikipedia.org/wiki/Acceptance_testing), these probably have some requirements such as environment variables to be set for API tokens and keys. Each test should error and tell you what are missing, so those are not documented here.
 
 If you're working on a feature and want to verify it is functioning (and also hasn't broken anything else), we recommend creating or running the acceptance tests.
 

@@ -1,7 +1,7 @@
 // Copyright (c) HashiCorp, Inc.
 // SPDX-License-Identifier: MPL-2.0
 
-package lxd
+package incus
 
 import (
 	"context"
@@ -14,7 +14,7 @@ import (
 )
 
 // The unique ID for this builder
-const BuilderId = "lxd"
+const BuilderId = "incus"
 
 type wrappedCommandTemplate struct {
 	Command string
@@ -43,7 +43,7 @@ func (b *Builder) Run(ctx context.Context, ui packersdk.Ui, hook packersdk.Hook)
 	}
 
 	steps := []multistep.Step{
-		&stepLxdLaunch{},
+		&stepIncusLaunch{},
 		&StepProvision{},
 		&stepPublish{},
 	}

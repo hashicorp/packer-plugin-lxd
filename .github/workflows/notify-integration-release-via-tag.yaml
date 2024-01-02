@@ -46,7 +46,7 @@ jobs:
       - name: Notify Release
         uses: ./integration-release-action
         with:
-          integration_identifier: "packer/hashicorp/lxd"
+          integration_identifier: "packer/bketelsen/incus"
           release_version: ${{ needs.strip-version.outputs.packer-version }}
           release_sha: ${{ github.ref }}
           github_token: ${{ secrets.GITHUB_TOKEN }}

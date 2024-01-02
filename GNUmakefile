@@ -1,4 +1,4 @@
-NAME=lxd
+NAME=incus
 BINARY=packer-plugin-${NAME}
 
 COUNT?=1

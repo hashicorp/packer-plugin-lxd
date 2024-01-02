@@ -1,25 +1,25 @@
 ---
 description: >
-  The `lxd` Packer builder builds containers for LXD. The builder starts an LXD
+  The `incus` Packer builder builds containers for incus. The builder starts an incus
 
   container, runs provisioners within this container, then saves the container
   as
 
-  an LXD image.
-page_title: LXD - Builders
-nav_title: LXD
+  an incus image.
+page_title: incus - Builders
+nav_title: incus
 ---
 
-# LXD Builder
+# incus Builder
 
-Type: `lxd`
-Artifact BuilderId: `lxd`
+Type: `incus`
+Artifact BuilderId: `incus`
 
-The `lxd` Packer builder builds containers for LXD. The builder starts an LXD
+The `incus` Packer builder builds containers for incus. The builder starts an incus
 container, runs provisioners within this container, then saves the container as
-an LXD image.
+an incus image.
 
-The LXD builder requires a modern linux kernel and the `lxd` package. This
+The incus builder requires a modern linux kernel and the `incus` package. This
 builder does not work with LXC.
 
 ## Basic Example
@@ -29,7 +29,7 @@ Below is a fully functioning example.
 **HCL**
 
 ```hcl
-source "lxd" "lxd-xenial" {
+source "incus" "incus-xenial" {
   image = "ubuntu-daily:xenial"
   output_image = "ubuntu-xenial"
   publish_properties {
@@ -38,7 +38,7 @@ source "lxd" "lxd-xenial" {
 }
 
 build {
-  sources = ["lxd.lxd-xenial"]
+  sources = ["incus.incus-xenial"]
 }
 ```
 
@@ -48,8 +48,8 @@ build {
 {
   "builders": [
     {
-      "type": "lxd",
-      "name": "lxd-xenial",
+      "type": "incus",
+      "name": "incus-xenial",
       "image": "ubuntu-daily:xenial",
       "output_image": "ubuntu-xenial",
       "publish_properties": {
@@ -64,12 +64,12 @@ build {
 
 ### Required:
 
-@include 'builder/lxd/Config-required.mdx'
+@include 'builder/incus/Config-required.mdx'
 
   ~> Note: The builder may appear to pause if required to download a
-  remote image, as they are usually 100-200MB. `/var/log/lxd/lxd.log` will
+  remote image, as they are usually 100-200MB. `/var/log/incus/incus.log` will
   mention starting such downloads.
 
 ### Optional:
 
-@include 'builder/lxd/Config-not-required.mdx'
+@include 'builder/incus/Config-not-required.mdx'

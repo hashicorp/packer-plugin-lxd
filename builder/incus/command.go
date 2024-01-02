@@ -1,7 +1,7 @@
 // Copyright (c) HashiCorp, Inc.
 // SPDX-License-Identifier: MPL-2.0
 
-package lxd
+package incus
 
 import (
 	"bytes"
@@ -21,13 +21,13 @@ func ShellCommand(command string) *exec.Cmd {
 	return exec.Command("/bin/sh", "-c", command)
 }
 
-// Yeah...LXD calls `lxc` because the command line is different between the
+// Yeah...incus calls `lxc` because the command line is different between the
 // packages. This should also avoid a naming collision between the LXC builder.
-func LXDCommand(args ...string) (string, error) {
+func IncusCommand(args ...string) (string, error) {
 	var stdout, stderr bytes.Buffer
 
-	log.Printf("Executing lxc command: %#v", args)
-	cmd := exec.Command("lxc", args...)
+	log.Printf("Executing incus command: %#v", args)
+	cmd := exec.Command("incus", args...)
 	cmd.Stdout = &stdout
 	cmd.Stderr = &stderr
 	err := cmd.Run()
@@ -36,7 +36,7 @@ func LXDCommand(args ...string) (string, error) {
 	stderrString := strings.TrimSpace(stderr.String())
 
 	if _, ok := err.(*exec.ExitError); ok {
-		err = fmt.Errorf("LXD command error: %s", stderrString)
+		err = fmt.Errorf("Incus command error: %s", stderrString)
 	}
 
 	log.Printf("stdout: %s", stdoutString)

@@ -4,7 +4,7 @@
 //go:generate packer-sdc struct-markdown
 //go:generate packer-sdc mapstructure-to-hcl2 -type Config
 
-package lxd
+package incus
 
 import (
 	"fmt"
@@ -21,8 +21,10 @@ type Config struct {
 	// The name of the output artifact. Defaults to
 	// name.
 	OutputImage   string `mapstructure:"output_image" required:"false"`
+	// Reuse image alias if it already exists; defaults to false
+	Reuse bool `mapstructure:"reuse" required:"false"`
 	ContainerName string `mapstructure:"container_name"`
-	// The (optional) name of the LXD remote on which to publish the
+	// The (optional) name of the incus remote on which to publish the
 	// container image.
 	PublishRemoteName string `mapstructure:"publish_remote_name" required:"false"`
 	// Lets you prefix all builder commands, such as
@@ -35,18 +37,18 @@ type Config struct {
 	Image   string `mapstructure:"image" required:"true"`
 	Profile string `mapstructure:"profile"`
 	// The number of seconds to sleep between launching
-	// the LXD instance and provisioning it; defaults to 3 seconds.
+	// the incus instance and provisioning it; defaults to 3 seconds.
 	InitSleep string `mapstructure:"init_sleep" required:"false"`
 	// Pass key values to the publish
 	// step to be set as properties on the output image. This is most helpful to
 	// set the description, but can be used to set anything needed. See
-	// https://stgraber.org/2016/03/30/lxd-2-0-image-management-512/
+	// https://stgraber.org/2016/03/30/incus-2-0-image-management-512/
 	// for more properties.
 	PublishProperties map[string]string `mapstructure:"publish_properties" required:"false"`
 	// List of key/value pairs you wish to
 	// pass to lxc launch via --config. Defaults to empty.
 	LaunchConfig map[string]string `mapstructure:"launch_config" required:"false"`
-	// Create LXD virtual-machine image on hosts running LXD 4.0 and above; defaults to false for container image
+	// Create incus virtual-machine image on hosts running incus 4.0 and above; defaults to false for container image
 	VirtualMachine bool `mapstructure:"virtual_machine"`
 	// Skip execute `lxc publish`; defaults to false
 	SkipPublish bool `mapstructure:"skip_publish" required:"false"`
@@ -81,7 +83,7 @@ func (c *Config) Prepare(raws ...interface{}) error {
 	}
 
 	if c.Image == "" {
-		errs = packersdk.MultiErrorAppend(errs, fmt.Errorf("`image` is a required parameter for LXD. Please specify an image by alias or fingerprint. e.g. `ubuntu-daily:x`"))
+		errs = packersdk.MultiErrorAppend(errs, fmt.Errorf("`image` is a required parameter for incus. Please specify an image by alias or fingerprint. e.g. `ubuntu-daily:x`"))
 	}
 
 	if c.Profile == "" {

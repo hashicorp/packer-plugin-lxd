@@ -1,7 +1,7 @@
 // Copyright (c) HashiCorp, Inc.
 // SPDX-License-Identifier: MPL-2.0
 
-package lxd
+package incus
 
 import (
 	"context"
@@ -51,7 +51,7 @@ func (c *Communicator) Start(ctx context.Context, cmd *packersdk.RemoteCmd) erro
 		}
 
 		log.Printf(
-			"lxc exec execution exited with '%d': '%s'",
+			"incus exec execution exited with '%d': '%s'",
 			exitStatus, cmd.Command)
 		cmd.SetExited(exitStatus)
 	}()
@@ -79,7 +79,7 @@ func (c *Communicator) Upload(dst string, r io.Reader, fi *os.FileInfo) error {
 		fileDestination = filepath.Join(c.ContainerName, dst, (*fi).Name())
 	}
 
-	cpCmd, err := c.CmdWrapper(fmt.Sprintf("lxc file push - %s", fileDestination))
+	cpCmd, err := c.CmdWrapper(fmt.Sprintf("incus file push - %s", fileDestination))
 	if err != nil {
 		return err
 	}
@@ -96,7 +96,7 @@ func (c *Communicator) UploadDir(dst string, src string, exclude []string) error
 	if !strings.HasSuffix(src, "/") {
 		src += "/"
 	}
-	pushCommand := fmt.Sprintf("lxc file push --debug -pr %s* %s", src, fileDestination)
+	pushCommand := fmt.Sprintf("incus file push --debug -pr %s* %s", src, fileDestination)
 	log.Printf(pushCommand)
 	cp, err := c.CmdWrapper(pushCommand)
 	if err != nil {
@@ -117,7 +117,7 @@ func (c *Communicator) UploadDir(dst string, src string, exclude []string) error
 }
 
 func (c *Communicator) Download(src string, w io.Writer) error {
-	cpCmd, err := c.CmdWrapper(fmt.Sprintf("lxc file pull %s -", filepath.Join(c.ContainerName, src)))
+	cpCmd, err := c.CmdWrapper(fmt.Sprintf("incus file pull %s -", filepath.Join(c.ContainerName, src)))
 	if err != nil {
 		return err
 	}
@@ -131,19 +131,19 @@ func (c *Communicator) Download(src string, w io.Writer) error {
 
 func (c *Communicator) DownloadDir(src string, dst string, exclude []string) error {
 	// TODO This could probably be "lxc exec <container> -- cd <src> && tar -czf - | tar -xzf - -C <dst>"
-	return fmt.Errorf("DownloadDir is not implemented for lxc")
+	return fmt.Errorf("DownloadDir is not implemented for incus")
 }
 
 func (c *Communicator) Execute(commandString string) (*exec.Cmd, error) {
-	log.Printf("Executing with lxc exec in container: %s %s", c.ContainerName, commandString)
+	log.Printf("Executing with incus exec in container: %s %s", c.ContainerName, commandString)
 	command, err := c.CmdWrapper(
-		fmt.Sprintf("lxc exec %s -- /bin/sh -c \"%s\"", c.ContainerName, commandString))
+		fmt.Sprintf("incus exec %s -- /bin/sh -c \"%s\"", c.ContainerName, commandString))
 	if err != nil {
 		return nil, err
 	}
 
 	localCmd := ShellCommand(command)
-	log.Printf("Executing lxc exec: %s %#v", localCmd.Path, localCmd.Args)
+	log.Printf("Executing incus exec: %s %#v", localCmd.Path, localCmd.Args)
 
 	return localCmd, nil
 }
