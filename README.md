@@ -19,7 +19,7 @@ Then, run [`packer init`](https://www.packer.io/docs/commands/init).
 packer {
   required_plugins {
     incus = {
-      version = ">= 1.0.2"
+      version = ">= 1.0.0"
       source  = "github.com/bketelsen/incus"
     }
   }
