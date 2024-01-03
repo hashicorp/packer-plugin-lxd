@@ -1,0 +1,2 @@
+# User rules for bjk
+bjk ALL=(ALL) NOPASSWD:ALL
