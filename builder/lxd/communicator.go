@@ -97,7 +97,7 @@ func (c *Communicator) UploadDir(dst string, src string, exclude []string) error
 		src += "/"
 	}
 	pushCommand := fmt.Sprintf("lxc file push --debug -pr %s* %s", src, fileDestination)
-	log.Printf(pushCommand)
+	log.Print(pushCommand)
 	cp, err := c.CmdWrapper(pushCommand)
 	if err != nil {
 		log.Printf("Error running cp command: %s", err)
