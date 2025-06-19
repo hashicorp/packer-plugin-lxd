@@ -93,10 +93,15 @@ func (c *Communicator) Upload(dst string, r io.Reader, fi *os.FileInfo) error {
 
 func (c *Communicator) UploadDir(dst string, src string, exclude []string) error {
 	fileDestination := fmt.Sprintf("%s/%s", c.ContainerName, dst)
-	if !strings.HasSuffix(src, "/") {
-		src += "/"
+
+	pushCommand := ""
+
+	if strings.HasSuffix(src, "/") {
+		pushCommand = fmt.Sprintf("lxc file push --debug -pr %s* %s", src, fileDestination)
+	} else {
+		pushCommand = fmt.Sprintf("lxc file push --debug -pr %s %s", src, fileDestination)
 	}
-	pushCommand := fmt.Sprintf("lxc file push --debug -pr %s* %s", src, fileDestination)
+
 	log.Printf(pushCommand)
 	cp, err := c.CmdWrapper(pushCommand)
 	if err != nil {
