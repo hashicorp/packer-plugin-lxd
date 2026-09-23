@@ -5,6 +5,7 @@ package lxd
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/hashicorp/hcl/v2/hcldec"
 	"github.com/hashicorp/packer-plugin-sdk/multistep"
@@ -66,7 +67,12 @@ func (b *Builder) Run(ctx context.Context, ui packersdk.Ui, hook packersdk.Hook)
 
 	id := "0"
 	if !b.config.SkipPublish {
-		id = state.Get("imageFingerprint").(string)
+		maybeId, ok := state.Get("imageFingerprint").(string)
+		if !ok {
+			return nil, fmt.Errorf("Failed to read imageFingerprint")
+		}
+		id = maybeId
+
 	}
 
 	artifact := &Artifact{
